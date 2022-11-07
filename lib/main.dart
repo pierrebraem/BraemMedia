@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Film.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,6 +22,9 @@ class Accueil extends StatefulWidget{
 }
 
 class _AccueilState extends State<Accueil>{
+  final controller = TextEditingController();
+  List<Film> films = exempleFilm;
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -34,6 +38,7 @@ class _AccueilState extends State<Accueil>{
           Container(
             margin: const EdgeInsets.fromLTRB(16, 16, 16, 16),
             child: TextField(
+              controller: controller,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
                 hintText: 'Nom du film',
@@ -42,6 +47,25 @@ class _AccueilState extends State<Accueil>{
                   borderSide: const BorderSide(color: Colors.black),
                 ),
               ),
+              onChanged: rechercheFilm,
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: films.length,
+              itemBuilder: (context, index){
+                final film = films[index];
+
+                return ListTile(
+                  leading: Image.network(
+                    film.urlImage,
+                    fit: BoxFit.cover,
+                    width: 50,
+                    height: 50,
+                  ),
+                  title: Text(film.title),
+                );
+              },
             ),
           ),
           ElevatedButton(
@@ -53,5 +77,15 @@ class _AccueilState extends State<Accueil>{
         ],
       ),
     );
+  }
+  void rechercheFilm(String query){
+    final suggestions = exempleFilm.where((film){
+      final titre = film.title.toLowerCase();
+      final input = query.toLowerCase();
+
+      return titre.contains(input);
+    }).toList();
+
+    setState(() => films = suggestions);
   }
 }
