@@ -44,6 +44,12 @@ class _AccueilState extends State<Accueil>{
               ),
             ),
           ),
+          ElevatedButton(
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Bouton de recherche fonctionnel")));
+            },
+            child: Text('Rechercher'),
+          ),
         ],
       ),
     );
