@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Film.dart';
+import 'Detail.dart';
 
 class Recherche extends StatelessWidget{
   const Recherche({super.key});
@@ -34,6 +35,12 @@ class Recherche extends StatelessWidget{
                 width: 50,
                 height: 50,
             ),
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Detail()),
+              );
+            }
           );
         },
       )
