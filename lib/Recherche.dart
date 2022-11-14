@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Film.dart';
 
 class Recherche extends StatelessWidget{
   const Recherche({super.key});
@@ -9,13 +10,33 @@ class Recherche extends StatelessWidget{
       appBar: AppBar(
         title: const Text('Recherche'),
       ),
-      body: Column(
-        children: <Widget>[
-          Container(
-            child: Text('Coucou'),
-          ),
-        ],
-      ),
+      body: ListView.separated(
+        separatorBuilder: (context, index) => Divider(color: Colors.cyan),
+        itemCount: exempleFilm.length,
+        itemBuilder: (context, index){
+          final film = exempleFilm[index];
+          return ListTile(
+            title: Text(
+              '${film.title}',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.cyan,
+                fontSize: 20),
+              ),
+            subtitle: Text(
+              '${film.annee}',
+              textAlign: TextAlign.center,
+            ),
+            leading: Image.network(
+                film.urlImage,
+                fit: BoxFit.cover,
+                width: 50,
+                height: 50,
+            ),
+          );
+        },
+      )
     );
   }
 }
