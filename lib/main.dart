@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Film.dart';
+import 'Recherche.dart';
 
 void main() => runApp(MyApp());
 
@@ -70,7 +71,10 @@ class _AccueilState extends State<Accueil>{
           ),
           ElevatedButton(
             onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Bouton de recherche fonctionnel")));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Recherche()),
+              );
             },
             child: Text('Rechercher'),
           ),
