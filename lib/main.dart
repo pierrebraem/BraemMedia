@@ -27,6 +27,12 @@ class _AccueilState extends State<Accueil>{
   List<Film> films = exempleFilm;
 
   @override
+  void dispose(){
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
@@ -69,7 +75,7 @@ class _AccueilState extends State<Accueil>{
               },
             ),
           ),
-          ElevatedButton(
+          /* ElevatedButton(
             onPressed: () {
               Navigator.push(
                 context,
@@ -77,6 +83,19 @@ class _AccueilState extends State<Accueil>{
               );
             },
             child: Text('Rechercher'),
+          ), */
+          ElevatedButton(
+            onPressed: (){
+              showDialog(
+                context: context,
+                builder: (context){
+                  return AlertDialog(
+                    content: Text(controller.text),
+                  );
+                }
+              );
+            },
+            child: Text("Rechercher"),
           ),
         ],
       ),
