@@ -3,7 +3,9 @@ import 'Film.dart';
 import 'Detail.dart';
 
 class Recherche extends StatelessWidget{
-  const Recherche({super.key});
+  const Recherche({super.key, required this.saisi});
+
+  final String saisi;
 
   @override
   Widget build(BuildContext context){
@@ -11,7 +13,10 @@ class Recherche extends StatelessWidget{
       appBar: AppBar(
         title: const Text('Recherche'),
       ),
-      body: ListView.separated(
+      body: Center(
+        child:Text(saisi)
+      ),
+      /* body: ListView.separated(
         separatorBuilder: (context, index) => Divider(color: Colors.cyan),
         itemCount: exempleFilm.length,
         itemBuilder: (context, index){
@@ -43,7 +48,7 @@ class Recherche extends StatelessWidget{
             }
           );
         },
-      )
+      ) */
     );
   }
 }

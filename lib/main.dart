@@ -75,16 +75,16 @@ class _AccueilState extends State<Accueil>{
               },
             ),
           ),
-          /* ElevatedButton(
+          ElevatedButton(
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const Recherche()),
+                MaterialPageRoute(builder: (context) => Recherche(saisi: controller.text)),
               );
             },
             child: Text('Rechercher'),
-          ), */
-          ElevatedButton(
+          ),
+          /* ElevatedButton(
             onPressed: (){
               showDialog(
                 context: context,
@@ -96,7 +96,7 @@ class _AccueilState extends State<Accueil>{
               );
             },
             child: Text("Rechercher"),
-          ),
+          ), */
         ],
       ),
     );
