@@ -1,11 +1,12 @@
+import 'package:apifilm/main.dart';
 import 'package:flutter/material.dart';
 import 'Film.dart';
 import 'Detail.dart';
 
 class Recherche extends StatelessWidget{
-  const Recherche({super.key, required this.saisi});
+  const Recherche({super.key, required this.listeFilm});
 
-  final String saisi;
+  final Future<Film> listeFilm;
 
   @override
   Widget build(BuildContext context){
@@ -14,10 +15,20 @@ class Recherche extends StatelessWidget{
         title: const Text('Recherche'),
       ),
       body: Center(
-        child:Text(saisi)
-      ),
-      /* body: ListView.separated(
-        separatorBuilder: (context, index) => Divider(color: Colors.cyan),
+        child: FutureBuilder<Film>(
+          future: listeFilm,
+          builder: (context, snapshot){
+            if(snapshot.hasData){
+              return Text(snapshot.data!.title + ' ' + snapshot.data!.urlImage + ' ' + snapshot.data!.annee);
+            }
+            else if(snapshot.hasError){
+              return Text('${snapshot.error}');
+            }
+
+            return const CircularProgressIndicator();
+          }
+        )
+        /* separatorBuilder: (context, index) => Divider(color: Colors.cyan),
         itemCount: exempleFilm.length,
         itemBuilder: (context, index){
           final film = exempleFilm[index];
@@ -47,8 +58,8 @@ class Recherche extends StatelessWidget{
               );
             }
           );
-        },
-      ) */
+        }, */
+      )
     );
   }
 }
