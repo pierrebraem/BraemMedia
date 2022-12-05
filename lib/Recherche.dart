@@ -43,7 +43,7 @@ class Recherche extends StatelessWidget{
                               width: 50,
                               height: 50,
                             ): Image.asset(
-                              'images/non_images.png',
+                              'assets/images/non_images.png',
                               fit: BoxFit.cover,
                               width: 50,
                               height: 50,
