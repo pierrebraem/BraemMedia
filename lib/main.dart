@@ -4,11 +4,12 @@ import 'dart:convert';
 import 'Film.dart';
 import 'Recherche.dart';
 
-Future<Film> recupFilm() async{
+Future<List<Film>> recupFilm() async{
   final response = await http.get(Uri.parse("https://www.omdbapi.com/?s=Star%20Wars&type=movie&apikey=8a86d5b2"));
 
   if(response.statusCode == 200){
-    return Film.fromJson(jsonDecode(response.body));
+    final liste = json.decode(response.body)['Search'] as List;
+    return liste.map((data) => Film.fromJson(data)).toList();
   }
   else{
     throw Exception("Erreur lors de l'appel de l'API");
@@ -38,7 +39,7 @@ class Execution extends StatefulWidget{
 class _AccueilState extends State<Execution>{
   final controller = TextEditingController();
   List<Film> films = exempleFilm;
-  late Future<Film> listeFilm;
+  late Future<List<Film>> listeFilm;
 
   @override
   void initState(){
