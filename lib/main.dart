@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'Film.dart';
 import 'Recherche.dart';
 
-Future<List<Film>> recupFilm() async{
-  final response = await http.get(Uri.parse("https://www.omdbapi.com/?s=Star%20Wars&type=movie&apikey=8a86d5b2"));
+Future<List<Film>> recupFilm(recherche) async{
+  final response = await http.get(Uri.parse("https://www.omdbapi.com/?s=" + recherche + "&type=movie&apikey=8a86d5b2"));
 
   if(response.statusCode == 200){
     final liste = json.decode(response.body)['Search'] as List;
@@ -40,12 +40,6 @@ class _AccueilState extends State<Execution>{
   final controller = TextEditingController();
   List<Film> films = exempleFilm;
   late Future<List<Film>> listeFilm;
-
-  @override
-  void initState(){
-    super.initState();
-    listeFilm = recupFilm();
-  }
 
   /* @override
   void dispose(){
@@ -98,6 +92,7 @@ class _AccueilState extends State<Execution>{
           ),
           ElevatedButton(
             onPressed: () {
+              listeFilm = recupFilm(controller.text);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => Recherche(listeFilm: listeFilm)),
