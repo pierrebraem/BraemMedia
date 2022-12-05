@@ -1,4 +1,3 @@
-import 'package:apifilm/main.dart';
 import 'package:flutter/material.dart';
 import 'Film.dart';
 import 'Detail.dart';
