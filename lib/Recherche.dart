@@ -18,14 +18,40 @@ class Recherche extends StatelessWidget{
             child: FutureBuilder(
                 future: listeFilm,
                 builder: (context, AsyncSnapshot snapshot){
-                  if(snapshot.hasData){
-                    return ListView.builder(
+                  if(snapshot.hasData) {
+                    return ListView.separated(
+                      separatorBuilder: (context, index) =>
+                          Divider(color: Colors.cyan),
                       itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index){
+                      itemBuilder: (context, index) {
                         return ListTile(
-                          title: Text((snapshot.data as dynamic)[index].title),
+                            title: Text(
+                              '${(snapshot.data as dynamic)[index].title}',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.cyan,
+                                  fontSize: 20),
+                            ),
+                            subtitle: Text(
+                              '${(snapshot.data as dynamic)[index].annee}',
+                              textAlign: TextAlign.center,
+                            ),
+                            leading: Image.network(
+                              (snapshot.data as dynamic)[index].urlImage,
+                              fit: BoxFit.cover,
+                              width: 50,
+                              height: 50,
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (
+                                    context) => const Detail()),
+                              );
+                            }
                         );
-                      }
+                      },
                     );
                   }
                   else if(snapshot.hasError){
@@ -35,37 +61,6 @@ class Recherche extends StatelessWidget{
                   return const CircularProgressIndicator();
                 }
             )
-          /* separatorBuilder: (context, index) => Divider(color: Colors.cyan),
-        itemCount: exempleFilm.length,
-        itemBuilder: (context, index){
-          final film = exempleFilm[index];
-          return ListTile(
-            title: Text(
-              '${film.title}',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.cyan,
-                fontSize: 20),
-              ),
-            subtitle: Text(
-              '${film.annee}',
-              textAlign: TextAlign.center,
-            ),
-            leading: Image.network(
-                film.urlImage,
-                fit: BoxFit.cover,
-                width: 50,
-                height: 50,
-            ),
-            onTap: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Detail()),
-              );
-            }
-          );
-        }, */
         )
     );
   }
