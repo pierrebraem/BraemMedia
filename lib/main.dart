@@ -38,7 +38,7 @@ class Execution extends StatefulWidget{
 
 class _AccueilState extends State<Execution>{
   final controller = TextEditingController();
-  List<Film> films = exempleFilm;
+  //List<Film> films = exempleFilm;
   late Future<List<Film>> listeFilm;
 
   /* @override
@@ -69,10 +69,10 @@ class _AccueilState extends State<Execution>{
                   borderSide: const BorderSide(color: Colors.black),
                 ),
               ),
-              onChanged: rechercheFilm,
+              //onChanged: rechercheFilm,
             ),
           ),
-          Expanded(
+          /* Expanded(
             child: ListView.builder(
               itemCount: films.length,
               itemBuilder: (context, index){
@@ -89,7 +89,7 @@ class _AccueilState extends State<Execution>{
                 );
               },
             ),
-          ),
+          ), */
           ElevatedButton(
             onPressed: () {
               listeFilm = recupFilm(controller.text);
@@ -117,7 +117,7 @@ class _AccueilState extends State<Execution>{
       ),
     );
   }
-  void rechercheFilm(String query){
+  /* void rechercheFilm(String query){
     final suggestions = exempleFilm.where((film){
       final titre = film.title.toLowerCase();
       final input = query.toLowerCase();
@@ -126,5 +126,5 @@ class _AccueilState extends State<Execution>{
     }).toList();
 
     setState(() => films = suggestions);
-  }
+  } */
 }
