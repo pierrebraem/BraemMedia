@@ -37,8 +37,13 @@ class Recherche extends StatelessWidget{
                               '${(snapshot.data as dynamic)[index].annee}',
                               textAlign: TextAlign.center,
                             ),
-                            leading: Image.network(
+                            leading: (snapshot.data as dynamic)[index].urlImage != "N/A"? Image.network(
                               (snapshot.data as dynamic)[index].urlImage,
+                              fit: BoxFit.cover,
+                              width: 50,
+                              height: 50,
+                            ): Image.asset(
+                              'images/non_images.png',
                               fit: BoxFit.cover,
                               width: 50,
                               height: 50,
