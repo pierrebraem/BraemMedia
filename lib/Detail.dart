@@ -42,7 +42,7 @@ class Detail extends StatelessWidget{
                   Text("${(snapshot.data as dynamic)[0].title}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan, fontSize: 40.0)),
                   Text("${(snapshot.data as dynamic)[0].released}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
                   Text("${(snapshot.data as dynamic)[0].genre}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
-                  Image.network("${(snapshot.data as dynamic)[0].urlImage}", width: 300, height: 300),
+                  (snapshot.data as dynamic)[0].urlImage != "N/A"? Image.network("${(snapshot.data as dynamic)[0].urlImage}", width: 300, height: 300) : Image.asset('assets/images/non_images.png', width: 300, height: 300),
                   (snapshot.data as dynamic)[0].plot != "N/A"? Text("${(snapshot.data as dynamic)[0].plot}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)) : Text(""),
                   (snapshot.data as dynamic)[0].rated != "N/A"? Text("Notation : " + "${(snapshot.data as dynamic)[0].rated}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)) : Text(""),
                   (snapshot.data as dynamic)[0].runtime != "N/A"? Text("Durée : " + "${(snapshot.data as dynamic)[0].runtime}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)) : Text(""),
