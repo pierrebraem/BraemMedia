@@ -3,8 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'FilmDetail.dart';
 
-Future<List<FilmDetail>> recupFilmDetail(titre) async{
-  final reponse = await http.get(Uri.parse("https://www.omdbapi.com/?t=" + titre + "&apikey=8a86d5b2"));
+Future<List<FilmDetail>> recupFilmDetail(imdbID) async{
+  final reponse = await http.get(Uri.parse("https://www.omdbapi.com/?i=" + imdbID + "&apikey=8a86d5b2"));
 
   if(reponse.statusCode == 200){
      final liste = json.decode("[" + reponse.body + "]") as List<dynamic>;
@@ -16,10 +16,10 @@ Future<List<FilmDetail>> recupFilmDetail(titre) async{
 }
 
 class Detail extends StatelessWidget{
-  Detail({super.key, required this.titre});
+  Detail({super.key, required this.imdbID});
 
-  final dynamic titre;
-  late Future<List<FilmDetail>> filmDetail = recupFilmDetail(titre);
+  final dynamic imdbID;
+  late Future<List<FilmDetail>> filmDetail = recupFilmDetail(imdbID);
 
   @override
   Widget build(BuildContext context){
