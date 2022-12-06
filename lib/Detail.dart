@@ -1,7 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'FilmDetail.dart';
+
+Future<List<FilmDetail>> recupFilmDetail(titre) async{
+  final reponse = await http.get(Uri.parse("https://www.omdbapi.com/?t=" + titre + "&apikey=8a86d5b2"));
+
+  if(reponse.statusCode == 200){
+     final liste = json.decode("[" + reponse.body + "]") as List<dynamic>;
+     return liste.map((data) => FilmDetail.fromJson(data)).toList();
+  }
+  else{
+    throw Exception("Erreur lors de l'appel de l'API");
+  }
+}
 
 class Detail extends StatelessWidget{
-  const Detail({super.key});
+  Detail({super.key, required this.titre});
+
+  final dynamic titre;
+  late Future<List<FilmDetail>> filmDetail = recupFilmDetail(titre);
 
   @override
   Widget build(BuildContext context){
@@ -9,8 +27,41 @@ class Detail extends StatelessWidget{
       appBar: AppBar(
         title: const Text('Detail'),
       ),
-      body: ListView(
-        children: <Widget>[
+      body: Center(
+        child: FutureBuilder(
+          future: filmDetail,
+          builder: (context, AsyncSnapshot snapshot){
+            if(snapshot.hasData){
+              return ListView(
+                children: <Widget>[
+                  Container(
+                    padding: (
+                        EdgeInsets.only(left: 20, top: 20)
+                    ),
+                  ),
+                  Text("${(snapshot.data as dynamic)[0].title}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan, fontSize: 40.0)),
+                  Text("${(snapshot.data as dynamic)[0].released}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
+                  Text("${(snapshot.data as dynamic)[0].genre}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
+                  Image.network("${(snapshot.data as dynamic)[0].urlImage}", width: 300, height: 300),
+                  Text("${(snapshot.data as dynamic)[0].plot}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
+                  Text("Notation : " + "${(snapshot.data as dynamic)[0].rated}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
+                  Text("Durée : " + "${(snapshot.data as dynamic)[0].runtime}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
+                  Text("Directeur : " + "${(snapshot.data as dynamic)[0].director}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
+                  Text("Écriture : " + "${(snapshot.data as dynamic)[0].writer}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
+                  Text("Acteurs : " + "${(snapshot.data as dynamic)[0].actors}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
+                  Text("Note métacritic : " + "${(snapshot.data as dynamic)[0].metascore}" + "/100", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
+                  Text("DVD : " + "${(snapshot.data as dynamic)[0].dvd}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
+                  //Text("BoxOffice: " + "${(snapshot.data as dynamic)[0].BoxOffice}" , textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
+                ]
+              );
+            }
+            else if(snapshot.hasError){
+              return Text('${snapshot.error}');
+            }
+            return const CircularProgressIndicator();
+          }
+        )
+        /* children: <Widget>[
           Container(
             padding: (
                 EdgeInsets.only(left: 20, top: 20)
@@ -29,7 +80,7 @@ class Detail extends StatelessWidget{
           Text("Note métacritic : 68/100", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
           Text("DVD : Pas de DVD sorti", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
           Text("BoxOffice: \$99,453,841", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan)),
-        ],
+        ], */
       ),
     );
   }

@@ -51,7 +51,8 @@ class Recherche extends StatelessWidget{
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (
-                                    context) => const Detail()),
+                                    context) => Detail(titre: '${(snapshot.data as dynamic)[index].title}')
+                                ),
                               );
                             }
                         );
