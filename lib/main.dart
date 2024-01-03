@@ -66,11 +66,30 @@ class _AccueilState extends State<Execution>{
           ),
           ElevatedButton(
             onPressed: () {
-              listeFilm = recupFilm(controller.text);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Recherche(listeFilm: listeFilm)),
-              );
+              if(controller.text.length < 3){
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text('Erreur de saisie'),
+                    content: const Text('Votre saisie doit comporter 3 caractères ou plus'),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('Ok'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    ],
+                  )
+                );
+              }
+              else{
+                listeFilm = recupFilm(controller.text);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Recherche(listeFilm: listeFilm)),
+                );
+              }
             },
             child: const Text('Rechercher'),
           ),
