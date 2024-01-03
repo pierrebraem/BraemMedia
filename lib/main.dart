@@ -99,7 +99,7 @@ class _AccueilState extends State<Execution>{
           Expanded(
             child: Container(
               alignment: Alignment.bottomCenter,
-              child: const Text('Version 1.0')
+              child: const Text('Version 1.0.1')
             ) 
           )
         ],
