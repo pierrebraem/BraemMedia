@@ -20,14 +20,14 @@ class Recherche extends StatelessWidget{
                   if(snapshot.hasData) {
                     return ListView.separated(
                       separatorBuilder: (context, index) =>
-                          Divider(color: Colors.cyan),
+                          const Divider(color: Colors.cyan),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         return ListTile(
                             title: Text(
                               '${(snapshot.data as dynamic)[index].title}',
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.cyan,
                                   fontSize: 20),

@@ -36,7 +36,7 @@ class Detail extends StatelessWidget{
                 children: <Widget>[
                   Container(
                     padding: (
-                        EdgeInsets.only(left: 20, top: 20)
+                        const EdgeInsets.only(left: 20, top: 20)
                     ),
                   ),
                   Text("${(snapshot.data as dynamic)[0].title}", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan, fontSize: 40.0)),

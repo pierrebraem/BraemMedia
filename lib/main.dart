@@ -38,14 +38,7 @@ class Execution extends StatefulWidget{
 
 class _AccueilState extends State<Execution>{
   final controller = TextEditingController();
-  //List<Film> films = exempleFilm;
   late Future<List<Film>> listeFilm;
-
-  /* @override
-  void dispose(){
-    controller.dispose();
-    super.dispose();
-  } */
 
   @override
   Widget build(BuildContext context){
@@ -79,8 +72,14 @@ class _AccueilState extends State<Execution>{
                 MaterialPageRoute(builder: (context) => Recherche(listeFilm: listeFilm)),
               );
             },
-            child: Text('Rechercher'),
+            child: const Text('Rechercher'),
           ),
+          Expanded(
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              child: const Text('Version 1.0')
+            ) 
+          )
         ],
       ),
     );
