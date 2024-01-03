@@ -18,6 +18,9 @@ class Recherche extends StatelessWidget{
                 future: listeFilm,
                 builder: (context, AsyncSnapshot snapshot){
                   if(snapshot.hasData) {
+                    if(snapshot.data.isEmpty){
+                      return const Text('Aucun résultat à votre recherche');
+                    }
                     return ListView.separated(
                       separatorBuilder: (context, index) =>
                           const Divider(color: Colors.cyan),
