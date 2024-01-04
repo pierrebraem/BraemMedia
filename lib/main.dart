@@ -5,7 +5,7 @@ import 'Film.dart';
 import 'Recherche.dart';
 
 Future<List<Film>> recupFilm(recherche) async{
-  final response = await http.get(Uri.parse("https://www.omdbapi.com/?s=" + recherche + "&type=movie&apikey=8a86d5b2"));
+  final response = await http.get(Uri.parse("${"https://www.omdbapi.com/?s=" + recherche}&type=movie&apikey=8a86d5b2"));
 
   if(response.statusCode == 200){
     if(json.decode(response.body)['Search'] != null){
@@ -19,9 +19,11 @@ Future<List<Film>> recupFilm(recherche) async{
   }
 }
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget{
+  const MyApp({super.key});
+
   @override
   Widget build (BuildContext context){
     return const MaterialApp(
