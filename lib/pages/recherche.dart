@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'Film.dart';
-import 'Detail.dart';
+import '../classes/media.dart';
+import 'detail.dart';
 
 class Recherche extends StatelessWidget{
   const Recherche({super.key, required this.listeFilm});
 
-  final Future<List<Film>> listeFilm;
+  final Future<List<Media>> listeFilm;
 
   @override
   Widget build(BuildContext context){

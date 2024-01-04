@@ -1,4 +1,4 @@
-class FilmDetail{
+class DetailMedia{
   final String title;
   final String urlImage;
   final String rated;
@@ -13,7 +13,7 @@ class FilmDetail{
   final String dvd;
   final String boxoffice;
 
-  const FilmDetail({
+  const DetailMedia({
     required this.title,
     required this.urlImage,
     required this.rated,
@@ -29,8 +29,8 @@ class FilmDetail{
     required this.boxoffice,
   });
 
-  factory FilmDetail.fromJson(Map<String, dynamic> json){
-    return FilmDetail(
+  factory DetailMedia.fromJson(Map<String, dynamic> json){
+    return DetailMedia(
       title: json['Title'],
       urlImage : json['Poster'],
       rated: json['Rated'],

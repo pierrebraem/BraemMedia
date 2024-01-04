@@ -1,25 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'FilmDetail.dart';
-
-Future<List<FilmDetail>> recupFilmDetail(imdbID) async{
-  final reponse = await http.get(Uri.parse("${"https://www.omdbapi.com/?i=" + imdbID}&apikey=8a86d5b2"));
-
-  if(reponse.statusCode == 200){
-     final liste = json.decode("[${reponse.body}]") as List<dynamic>;
-     return liste.map((data) => FilmDetail.fromJson(data)).toList();
-  }
-  else{
-    throw Exception("Erreur lors de l'appel de l'API");
-  }
-}
+import '../classes/detail_media.dart';
+import '../fonctions.dart' as fonctions;
 
 class Detail extends StatelessWidget{
   Detail({super.key, required this.imdbID});
 
   final dynamic imdbID;
-  late Future<List<FilmDetail>> filmDetail = recupFilmDetail(imdbID);
+  late Future<List<DetailMedia>> filmDetail = fonctions.recupFilmDetail(imdbID);
 
   @override
   Widget build(BuildContext context){

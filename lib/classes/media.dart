@@ -1,18 +1,18 @@
-class Film{
+class Media{
   final String title;
   final String imdbID;
   final String urlImage;
   final String annee;
 
-  const Film({
+  const Media({
     required this.title,
     required this.imdbID,
     required this.urlImage,
     required this.annee,
 });
 
-  factory Film.fromJson(Map<String, dynamic> json){
-    return Film(
+  factory Media.fromJson(Map<String, dynamic> json){
+    return Media(
       title: json['Title'],
       imdbID: json['imdbID'],
       urlImage: json['Poster'],

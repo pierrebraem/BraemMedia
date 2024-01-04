@@ -1,23 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'Film.dart';
-import 'Recherche.dart';
-
-Future<List<Film>> recupFilm(recherche) async{
-  final response = await http.get(Uri.parse("${"https://www.omdbapi.com/?s=" + recherche}&type=movie&apikey=8a86d5b2"));
-
-  if(response.statusCode == 200){
-    if(json.decode(response.body)['Search'] != null){
-      final liste = json.decode(response.body)['Search'] as List;
-      return liste.map((data) => Film.fromJson(data)).toList();
-    }
-    return [];
-  }
-  else{
-    throw Exception("Erreur lors de l'appel de l'API");
-  }
-}
+import 'classes/media.dart';
+import 'pages/recherche.dart';
+import 'fonctions.dart' as fonctions;
 
 void main() => runApp(const MyApp());
 
@@ -43,7 +27,7 @@ class Execution extends StatefulWidget{
 
 class _AccueilState extends State<Execution>{
   final controller = TextEditingController();
-  late Future<List<Film>> listeFilm;
+  late Future<List<Media>> listeFilm;
 
   @override
   Widget build(BuildContext context){
@@ -89,7 +73,7 @@ class _AccueilState extends State<Execution>{
                 );
               }
               else{
-                listeFilm = recupFilm(controller.text);
+                listeFilm = fonctions.recupFilm(controller.text);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Recherche(listeFilm: listeFilm)),
