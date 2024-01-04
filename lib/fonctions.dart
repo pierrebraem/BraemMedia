@@ -3,8 +3,8 @@ import 'classes/media.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<List<DetailMedia>> recupFilmDetail(imdbID) async{
-  final reponse = await http.get(Uri.parse("${"https://www.omdbapi.com/?i=" + imdbID}&apikey=8a86d5b2"));
+Future<List<DetailMedia>> recupDetailMedia(imdbID) async{
+  final reponse = await http.get(Uri.parse("https://www.omdbapi.com/?i=$imdbID&apikey=8a86d5b2"));
 
   if(reponse.statusCode == 200){
      final liste = json.decode("[${reponse.body}]") as List<dynamic>;
@@ -15,8 +15,15 @@ Future<List<DetailMedia>> recupFilmDetail(imdbID) async{
   }
 }
 
-Future<List<Media>> recupFilm(recherche) async{
-  final response = await http.get(Uri.parse("${"https://www.omdbapi.com/?s=" + recherche}&type=movie&apikey=8a86d5b2"));
+Future<List<Media>> recupMedia(recherche, type) async{
+  String url = "";
+  if(type == 'all'){
+    url = "https://www.omdbapi.com/?s=$recherche&apikey=8a86d5b2";
+  }
+  else{
+    url = "https://www.omdbapi.com/?s=$recherche&type=$type&apikey=8a86d5b2";
+  }
+  final response = await http.get(Uri.parse(url));
 
   if(response.statusCode == 200){
     if(json.decode(response.body)['Search'] != null){

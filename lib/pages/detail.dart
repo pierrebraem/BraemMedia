@@ -6,7 +6,7 @@ class Detail extends StatelessWidget{
   Detail({super.key, required this.imdbID});
 
   final dynamic imdbID;
-  late Future<List<DetailMedia>> filmDetail = fonctions.recupFilmDetail(imdbID);
+  late Future<List<DetailMedia>> filmDetail = fonctions.recupDetailMedia(imdbID);
 
   @override
   Widget build(BuildContext context){

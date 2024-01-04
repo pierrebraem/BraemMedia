@@ -10,8 +10,7 @@ class DetailMedia{
   final String actors;
   final String plot;
   final String metascore;
-  final String dvd;
-  final String boxoffice;
+  final String? dvd;
 
   const DetailMedia({
     required this.title,
@@ -25,8 +24,7 @@ class DetailMedia{
     required this.actors,
     required this.plot,
     required this.metascore,
-    required this.dvd,
-    required this.boxoffice,
+    this.dvd
   });
 
   factory DetailMedia.fromJson(Map<String, dynamic> json){
@@ -42,8 +40,7 @@ class DetailMedia{
       actors: json['Actors'],
       plot: json['Plot'],
       metascore: json['Metascore'],
-      dvd: json['DVD'],
-      boxoffice: json['BoxOffice'],
+      dvd: json['DVD']
     );
   }
 }

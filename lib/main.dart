@@ -28,6 +28,7 @@ class Execution extends StatefulWidget{
 class _AccueilState extends State<Execution>{
   final controller = TextEditingController();
   late Future<List<Media>> listeFilm;
+  String dropdownValue = 'movie';
 
   @override
   Widget build(BuildContext context){
@@ -53,6 +54,28 @@ class _AccueilState extends State<Execution>{
               ),
             ),
           ),
+          DropdownButton<String>(
+            value: dropdownValue,
+            onChanged: (String? value) {
+              setState(() {
+                dropdownValue = value!;
+              });
+            },
+            items: const [
+              DropdownMenuItem<String>(
+                value: 'movie',
+                child: Text('Film')
+              ),
+              DropdownMenuItem<String>(
+                value: 'series',
+                child: Text('Série')
+              ),
+              DropdownMenuItem<String>(
+                value: 'all',
+                child: Text('Tout')
+              )
+            ]
+          ),
           ElevatedButton(
             onPressed: () {
               if(controller.text.length < 3){
@@ -73,7 +96,7 @@ class _AccueilState extends State<Execution>{
                 );
               }
               else{
-                listeFilm = fonctions.recupFilm(controller.text);
+                listeFilm = fonctions.recupMedia(controller.text, dropdownValue);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Recherche(listeFilm: listeFilm)),
