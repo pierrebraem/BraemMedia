@@ -3,12 +3,13 @@ import 'classes/media.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<List<DetailMedia>> recupDetailMedia(imdbID) async{
+Future<DetailMedia> recupDetailMedia(imdbID) async{
   final reponse = await http.get(Uri.parse("https://www.omdbapi.com/?i=$imdbID&apikey=8a86d5b2"));
 
   if(reponse.statusCode == 200){
-     final liste = json.decode("[${reponse.body}]") as List<dynamic>;
-     return liste.map((data) => DetailMedia.fromJson(data)).toList();
+     final liste = json.decode("[${reponse.body}]") as List;
+     return DetailMedia.fromJson(liste[0]);
+     //return liste.map((data) => DetailMedia.fromJson(data)).toList();
   }
   else{
     throw Exception("Erreur lors de l'appel de l'API");
