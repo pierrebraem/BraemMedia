@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'classes/media.dart';
 import 'pages/recherche.dart';
-import 'fonctions.dart' as fonctions;
 
 void main() => runApp(const MyApp());
 
@@ -96,10 +95,9 @@ class _AccueilState extends State<Execution>{
                 );
               }
               else{
-                listeFilm = fonctions.recupMedia(controller.text, dropdownValue);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Recherche(listeFilm: listeFilm)),
+                  MaterialPageRoute(builder: (context) => Recherche(text: controller.text, dropdownValue: dropdownValue)),
                 );
               }
             },

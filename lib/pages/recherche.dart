@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import '../classes/media.dart';
 import 'detail.dart';
+import '../fonctions.dart' as fonctions;
 
 class Recherche extends StatelessWidget{
-  const Recherche({super.key, required this.listeFilm});
+  Recherche({super.key, required this.text, required this.dropdownValue});
 
-  final Future<List<Media>> listeFilm;
+  final dynamic text;
+  final dynamic dropdownValue;
+  late final Future<List<Media>> listeFilm = fonctions.recupMedia(text, dropdownValue);
 
   @override
   Widget build(BuildContext context){
