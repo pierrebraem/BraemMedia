@@ -1,3 +1,5 @@
+import '../classes/episode.dart';
+
 class DetailMedia{
   final String title;
   final String type;
@@ -11,9 +13,10 @@ class DetailMedia{
   final String actors;
   final String plot;
   final String metascore;
+  List<Episode>? episodes;
   final String? dvd;
 
-  const DetailMedia({
+  DetailMedia({
     required this.title,
     required this.type,
     required this.urlImage,
@@ -26,6 +29,7 @@ class DetailMedia{
     required this.actors,
     required this.plot,
     required this.metascore,
+    this.episodes,
     this.dvd
   });
 
