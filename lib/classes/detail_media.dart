@@ -1,5 +1,6 @@
 class DetailMedia{
   final String title;
+  final String type;
   final String urlImage;
   final String rated;
   final String released;
@@ -14,6 +15,7 @@ class DetailMedia{
 
   const DetailMedia({
     required this.title,
+    required this.type,
     required this.urlImage,
     required this.rated,
     required this.released,
@@ -30,6 +32,7 @@ class DetailMedia{
   factory DetailMedia.fromJson(Map<String, dynamic> json){
     return DetailMedia(
       title: json['Title'],
+      type: json['Type'],
       urlImage : json['Poster'],
       rated: json['Rated'],
       released: json['Released'],

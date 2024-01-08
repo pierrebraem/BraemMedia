@@ -30,6 +30,7 @@ class Detail extends StatelessWidget{
                   Text("${(snapshot.data).released}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
                   Text("${(snapshot.data).genre}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
                   (snapshot.data).urlImage != "N/A"? Image.network("${(snapshot.data).urlImage}", width: 300, height: 300) : Image.asset('assets/images/non_images.png', width: 300, height: 300),
+                  Text("Type de média : ${(snapshot.data).type}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
                   Text("${(snapshot.data).plot}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
                   Text("Notation : ${(snapshot.data).rated}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
                   Text("Durée : ${(snapshot.data).runtime}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
@@ -37,7 +38,7 @@ class Detail extends StatelessWidget{
                   Text("Écriture : ${(snapshot.data).writer}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
                   Text("Acteurs : ${(snapshot.data).actors}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
                   Text("Note métacritic sur 100 : ${(snapshot.data).metascore}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
-                  (snapshot.data).dvd != null? Text("DVD : " "${(snapshot.data).dvd}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)) : const Text(""),
+                  (snapshot.data).dvd != null && (snapshot.data).type != 'game'? Text("DVD : " "${(snapshot.data).dvd}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)) : const Text(""),
                 ]
               );
             }

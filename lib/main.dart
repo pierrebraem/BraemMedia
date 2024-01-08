@@ -70,6 +70,10 @@ class _AccueilState extends State<Execution>{
                 child: Text('Série')
               ),
               DropdownMenuItem<String>(
+                value: 'game',
+                child: Text('Jeux'),
+              ),
+              DropdownMenuItem<String>(
                 value: 'all',
                 child: Text('Tout')
               )
