@@ -4,8 +4,10 @@ import 'classes/episode.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+const String apikey = "8a86d5b2";
+
 Future<DetailMedia> recupDetailMedia(imdbID) async{
-  final response = await http.get(Uri.parse("https://www.omdbapi.com/?i=$imdbID&apikey=8a86d5b2"));
+  final response = await http.get(Uri.parse("https://www.omdbapi.com/?i=$imdbID&apikey=$apikey"));
 
   if(response.statusCode == 200){
     final liste = json.decode("[${response.body}]") as List;
@@ -27,10 +29,10 @@ Future<DetailMedia> recupDetailMedia(imdbID) async{
 Future<List<Media>> recupMedia(recherche, type) async{
   String url = "";
   if(type == 'all'){
-    url = "https://www.omdbapi.com/?s=$recherche&apikey=8a86d5b2";
+    url = "https://www.omdbapi.com/?s=$recherche&apikey=$apikey";
   }
   else{
-    url = "https://www.omdbapi.com/?s=$recherche&type=$type&apikey=8a86d5b2";
+    url = "https://www.omdbapi.com/?s=$recherche&type=$type&apikey=$apikey";
   }
   final response = await http.get(Uri.parse(url));
 
@@ -46,15 +48,17 @@ Future<List<Media>> recupMedia(recherche, type) async{
   }
 }
 
-Future<List<Episode>> recupEpisodes(imdbID, totalSaison) async{
-  List<Episode> liste = [];
+Future<List<List<Episode>>> recupEpisodes(imdbID, totalSaison) async{
+    List<List<Episode>> listeSaison = [];
 
     for(int i = 1; i <= totalSaison; i++){
-      var response = await http.get(Uri.parse("https://www.omdbapi.com/?i=$imdbID&season=$i&apikey=8a86d5b2"));
+      var response = await http.get(Uri.parse("https://www.omdbapi.com/?i=$imdbID&season=$i&apikey=$apikey"));
       if(response.statusCode == 200){
         if(json.decode(response.body)['Episodes'] != null){
+          List<Episode> listeEpisode = [];
           var saison = json.decode(response.body)['Episodes'] as List;
-          saison.map((data) => liste.add(Episode.fromJson(data))).toList();
+          saison.map((data) => listeEpisode.add(Episode.fromJson(data))).toList();
+          listeSaison.add(listeEpisode);
         }
       }
       else{
@@ -62,5 +66,5 @@ Future<List<Episode>> recupEpisodes(imdbID, totalSaison) async{
       }
     }
 
-  return liste;
+  return listeSaison;
 }

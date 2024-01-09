@@ -13,7 +13,7 @@ class DetailMedia{
   final String actors;
   final String plot;
   final String metascore;
-  List<Episode>? episodes;
+  List<List<Episode>>? episodes;
   final String? totalSeason;
   final String? dvd;
 

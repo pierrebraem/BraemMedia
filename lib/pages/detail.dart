@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../classes/detail_media.dart';
+import '../classes/episode.dart';
 import '../fonctions.dart' as fonctions;
 
 class Detail extends StatelessWidget{
@@ -41,23 +42,23 @@ class Detail extends StatelessWidget{
                   (snapshot.data).dvd != null && (snapshot.data).type != 'game' ? Text("DVD : " "${(snapshot.data).dvd}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)) : const Text(""),
 
 
-                  (snapshot.data).type == 'series' && (snapshot.data).episodes != null ? const Text("Liste des Episodes", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan, fontSize: 30.0)) : const Text(""),
                   (snapshot.data).type == 'series' && (snapshot.data).episodes != null ?
-                  SizedBox(
-                    height: 400,
-                    child: ListView.separated(
-                      separatorBuilder: (context, index) => const Divider(color: Colors.cyan),
-                      itemCount: (snapshot.data).episodes!.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text('${(snapshot.data).episodes[index].title}'),
-                          subtitle: Text('${(snapshot.data).episodes[index].episode} - ${(snapshot.data).episodes[index].released}')
-                        );
-                      },
+                    Column(
+                      children: [
+                        for (int i = 0; i<(snapshot.data).episodes.length; i++)
+                        Column(
+                          children: [
+                            Text("Saison ${i + 1}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan, fontSize: 30.0)),
+                            for (Episode j in (snapshot.data).episodes[i])
+                            ListTile(
+                              title: Text("${j.title}"),
+                              subtitle: Text("Episode : ${j.episode} - Sorti le ${j.released}"),
+                            )
+                          ],
+                        )
+                      ],
                     )
-                  )
-                  :
-                  const Text("")
+                  : const Text("")
                 ]
               );
             }
