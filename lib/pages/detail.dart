@@ -38,10 +38,11 @@ class Detail extends StatelessWidget{
                   Text("Écriture : ${(snapshot.data).writer}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
                   Text("Acteurs : ${(snapshot.data).actors}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
                   Text("Note métacritic sur 100 : ${(snapshot.data).metascore}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
-                  (snapshot.data).dvd != null && (snapshot.data).type != 'game'? Text("DVD : " "${(snapshot.data).dvd}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)) : const Text(""),
+                  (snapshot.data).dvd != null && (snapshot.data).type != 'game' ? Text("DVD : " "${(snapshot.data).dvd}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)) : const Text(""),
 
-                  const Text("Liste des Episodes", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan, fontSize: 30.0)),
 
+                  (snapshot.data).type == 'series' && (snapshot.data).episodes != null ? const Text("Liste des Episodes", textAlign: TextAlign.center, style: TextStyle(color: Colors.cyan, fontSize: 30.0)) : const Text(""),
+                  (snapshot.data).type == 'series' && (snapshot.data).episodes != null ?
                   SizedBox(
                     height: 400,
                     child: ListView.separated(
@@ -55,6 +56,8 @@ class Detail extends StatelessWidget{
                       },
                     )
                   )
+                  :
+                  const Text("")
                 ]
               );
             }

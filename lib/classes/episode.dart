@@ -8,4 +8,12 @@ class Episode{
     required this.episode,
     required this.released
   });
+
+  factory Episode.fromJson(Map<String, dynamic> json){
+    return Episode(
+      title: json['Title'],
+      episode: json['Episode'],
+      released: json['Released']
+    );
+  }
 }

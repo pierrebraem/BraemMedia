@@ -14,6 +14,7 @@ class DetailMedia{
   final String plot;
   final String metascore;
   List<Episode>? episodes;
+  final String? totalSeason;
   final String? dvd;
 
   DetailMedia({
@@ -30,6 +31,7 @@ class DetailMedia{
     required this.plot,
     required this.metascore,
     this.episodes,
+    this.totalSeason,
     this.dvd
   });
 
@@ -47,6 +49,7 @@ class DetailMedia{
       actors: json['Actors'],
       plot: json['Plot'],
       metascore: json['Metascore'],
+      totalSeason: json['totalSeasons'],
       dvd: json['DVD']
     );
   }
