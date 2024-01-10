@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'classes/media.dart';
 import 'pages/recherche.dart';
+import 'styles.dart';
 
 void main() => runApp(const MyApp());
 
@@ -9,10 +10,18 @@ class MyApp extends StatelessWidget{
 
   @override
   Widget build (BuildContext context){
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        extensions: <ThemeExtension<dynamic>>[
+          const ClassicText(color: Colors.green),
+          MediaTitle(color: Colors.green, size: Theme.of(context).textTheme.displaySmall),
+          SearchTitle(color: Colors.green, size: Theme.of(context).textTheme.titleLarge, fontWeight: FontWeight.bold)
+        ]
+      ),
       title: 'APIFilm',
-      home: Execution(),
+      home: const Execution(),
     );
   }
 }

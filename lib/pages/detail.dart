@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../classes/detail_media.dart';
 import '../classes/episode.dart';
 import '../fonctions.dart' as fonctions;
+import '../styles.dart';
 
 class Detail extends StatelessWidget{
   Detail({super.key, required this.imdbID});
@@ -11,6 +12,9 @@ class Detail extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
+    final ClassicText classicText = Theme.of(context).extension<ClassicText>()!;
+    final MediaTitle mediaTitle = Theme.of(context).extension<MediaTitle>()!;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail'),
@@ -27,19 +31,19 @@ class Detail extends StatelessWidget{
                         const EdgeInsets.only(left: 20, top: 20)
                     ),
                   ),
-                  Text("${(snapshot.data).title}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan, fontSize: 40.0)),
-                  Text("${(snapshot.data).released}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
-                  Text("${(snapshot.data).genre}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
-                  (snapshot.data).urlImage != "N/A"? Image.network("${(snapshot.data).urlImage}", width: 300, height: 300) : Image.asset('assets/images/non_images.png', width: 300, height: 300),
-                  Text("Type de média : ${(snapshot.data).type}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
-                  Text("${(snapshot.data).plot}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
-                  Text("Notation : ${(snapshot.data).rated}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
-                  Text("Durée : ${(snapshot.data).runtime}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
-                  Text("Directeur : ${(snapshot.data).director}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
-                  Text("Écriture : ${(snapshot.data).writer}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
-                  Text("Acteurs : ${(snapshot.data).actors}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
-                  Text("Note métacritic sur 100 : ${(snapshot.data).metascore}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)),
-                  (snapshot.data).dvd != null && (snapshot.data).type != 'game' ? Text("DVD : " "${(snapshot.data).dvd}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan)) : const Text(""),
+                  Text("${(snapshot.data).title}", textAlign: TextAlign.center, style: mediaTitle.size!.copyWith(color: mediaTitle.color)),
+                  Text("${(snapshot.data).released}", textAlign: TextAlign.center, style: TextStyle(color: classicText.color)),
+                  Text("${(snapshot.data).genre}", textAlign: TextAlign.center, style: TextStyle(color: classicText.color)),
+                  Image.network("${(snapshot.data).urlImage}", width: 300, height: 300, errorBuilder: (context, error, stackTrace) {return Image.asset('assets/images/non_images.png');}),
+                  Text("Type de média : ${(snapshot.data).type}", textAlign: TextAlign.center, style: TextStyle(color: classicText.color)),
+                  Text("${(snapshot.data).plot}", textAlign: TextAlign.center, style: TextStyle(color: classicText.color)),
+                  Text("Notation : ${(snapshot.data).rated}", textAlign: TextAlign.center, style: TextStyle(color: classicText.color)),
+                  Text("Durée : ${(snapshot.data).runtime}", textAlign: TextAlign.center, style: TextStyle(color: classicText.color)),
+                  Text("Directeur : ${(snapshot.data).director}", textAlign: TextAlign.center, style: TextStyle(color: classicText.color)),
+                  Text("Écriture : ${(snapshot.data).writer}", textAlign: TextAlign.center, style: TextStyle(color: classicText.color)),
+                  Text("Acteurs : ${(snapshot.data).actors}", textAlign: TextAlign.center, style: TextStyle(color: classicText.color)),
+                  Text("Note métacritic sur 100 : ${(snapshot.data).metascore}", textAlign: TextAlign.center, style: TextStyle(color: classicText.color)),
+                  (snapshot.data).dvd != null && (snapshot.data).type != 'game' ? Text("DVD : " "${(snapshot.data).dvd}", textAlign: TextAlign.center, style: TextStyle(color: classicText.color)) : const Text(""),
 
 
                   (snapshot.data).type == 'series' && (snapshot.data).episodes != null ?
@@ -48,10 +52,10 @@ class Detail extends StatelessWidget{
                         for (int i = 0; i<(snapshot.data).episodes.length; i++)
                         Column(
                           children: [
-                            Text("Saison ${i + 1}", textAlign: TextAlign.center, style: const TextStyle(color: Colors.cyan, fontSize: 30.0)),
+                            Text("Saison ${i + 1}", textAlign: TextAlign.center, style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.green)),
                             for (Episode j in (snapshot.data).episodes[i])
                             ListTile(
-                              title: Text("${j.title}"),
+                              title: Text(j.title),
                               subtitle: Text("Episode : ${j.episode} - Sorti le ${j.released}"),
                             )
                           ],

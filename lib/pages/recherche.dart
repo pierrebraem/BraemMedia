@@ -1,3 +1,4 @@
+import 'package:apifilm/styles.dart';
 import 'package:flutter/material.dart';
 import '../classes/media.dart';
 import 'detail.dart';
@@ -12,6 +13,8 @@ class Recherche extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
+    final SearchTitle searchTitle = Theme.of(context).extension<SearchTitle>()!;
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Recherche'),
@@ -33,25 +36,20 @@ class Recherche extends StatelessWidget{
                             title: Text(
                               '${(snapshot.data as dynamic)[index].title}',
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.cyan,
-                                  fontSize: 20),
+                              style: searchTitle.size!.copyWith(color: searchTitle.color, fontWeight: searchTitle.fontWeight)
                             ),
                             subtitle: Text(
                               '${(snapshot.data as dynamic)[index].annee}',
                               textAlign: TextAlign.center,
                             ),
-                            leading: (snapshot.data as dynamic)[index].urlImage != "N/A"? Image.network(
+                            leading: Image.network(
                               (snapshot.data as dynamic)[index].urlImage,
                               fit: BoxFit.cover,
                               width: 50,
                               height: 50,
-                            ): Image.asset(
-                              'assets/images/non_images.png',
-                              fit: BoxFit.cover,
-                              width: 50,
-                              height: 50,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset('assets/images/non_images.png');
+                              },
                             ),
                             onTap: () {
                               Navigator.push(
