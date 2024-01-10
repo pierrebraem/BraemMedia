@@ -1,5 +1,5 @@
-name: apifilm
-description: A new Flutter project.
+name: braemmedia
+description: braemmedia est une application réalisé en Flutter. Elle permet de récupérer des informations sur un film, une série ou un jeu en utilisant OMDb API.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.

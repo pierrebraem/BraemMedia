@@ -1,4 +1,4 @@
-import 'package:apifilm/styles.dart';
+import 'package:braemmedia/styles.dart';
 import 'package:flutter/material.dart';
 import '../classes/media.dart';
 import 'detail.dart';

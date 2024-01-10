@@ -1,11 +1,11 @@
 {
-    "name": "apifilm",
-    "short_name": "apifilm",
+    "name": "braemmedia",
+    "short_name": "braemmedia",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "braemmedia est une application réalisé en Flutter. Elle permet de récupérer des informations sur un film, une série ou un jeu en utilisant OMDb API.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

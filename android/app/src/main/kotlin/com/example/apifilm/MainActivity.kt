@@ -1,4 +1,4 @@
-package com.example.apifilm
+package com.pierrebraem.braemmedia
 
 import io.flutter.embedding.android.FlutterActivity
 

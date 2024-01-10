@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget{
           SearchTitle(color: Colors.green, size: Theme.of(context).textTheme.titleLarge, fontWeight: FontWeight.bold)
         ]
       ),
-      title: 'APIFilm',
+      title: 'Braemmedia',
       home: const Execution(),
     );
   }
@@ -42,7 +42,7 @@ class _AccueilState extends State<Execution>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: const Text("APIFilm"),
+        title: const Text("BraemMedia"),
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
@@ -54,7 +54,7 @@ class _AccueilState extends State<Execution>{
               controller: controller,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
-                hintText: 'Nom du film',
+                hintText: 'Entrer le nom d\'un média',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                   borderSide: const BorderSide(color: Colors.black),
@@ -119,7 +119,7 @@ class _AccueilState extends State<Execution>{
           Expanded(
             child: Container(
               alignment: Alignment.bottomCenter,
-              child: const Text('Version 1.0.1')
+              child: const Text('Version 1.1')
             ) 
           )
         ],
