@@ -2,9 +2,10 @@ import 'classes/detail_media.dart';
 import 'classes/media.dart';
 import 'classes/episode.dart';
 import 'package:http/http.dart' as http;
+import 'api.dart' as api;
 import 'dart:convert';
 
-const String apikey = "8a86d5b2";
+const String apikey = api.key;
 
 Future<DetailMedia> recupDetailMedia(imdbID) async{
   final response = await http.get(Uri.parse("https://www.omdbapi.com/?i=$imdbID&apikey=$apikey"));
